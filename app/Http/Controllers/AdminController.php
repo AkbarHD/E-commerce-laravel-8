@@ -35,7 +35,7 @@ class AdminController extends Controller
     public function __construct(StatefulGuard $guard)
     {
         $this->guard = $guard;
-         
+
     }
 
     public function loginForm(){
@@ -108,6 +108,7 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
+        // bawaan dari library Fortify
         return app(LogoutResponse::class);
     }
 }
