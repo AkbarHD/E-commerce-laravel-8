@@ -39,7 +39,7 @@ class AdminController extends Controller
     }
 
     public function loginForm(){
-    	return view('auth.login', ['guard' => 'admin']);
+    	return view('auth.login_admin', ['guard' => 'admin']);
     }
 
     /**
@@ -61,6 +61,7 @@ class AdminController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        // dd($request->all());
         return $this->loginPipeline($request)->then(function ($request) {
             return app(LoginResponse::class);
         });
@@ -108,7 +109,7 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        // bawaan dari library Fortify
+        // bawaan dari library Jetstream`
         return app(LogoutResponse::class);
     }
 }
