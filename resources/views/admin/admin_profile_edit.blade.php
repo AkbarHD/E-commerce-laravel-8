@@ -1,6 +1,6 @@
 @extends('admin.admin_master')
 @section('content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <div class="container-full">
         <!-- Main content -->
         <section class="content">
@@ -14,7 +14,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form action="" method="" novalidate>
+                            <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
@@ -23,7 +24,7 @@
                                                 <div class="form-group">
                                                     <h5>Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="text" class="form-control"
+                                                        <input type="text" name="name" class="form-control"
                                                             value="{{ $editData->name }}" required>
                                                     </div>
 
@@ -44,14 +45,15 @@
                                                 <div class="form-group">
                                                     <h5>Profile Image <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input id="image" type="file" name="profile_photo_path" class="form-control"
-                                                            required>
+                                                        <input id="image" type="file" name="profile_photo_path"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
-                                                <img id="showImage" class="rounded-circle" style="width: 85px; height: 85px;"
+                                                <img id="showImage" class="rounded-circle"
+                                                    style="width: 85px; height: 85px;"
                                                     src="{{ !empty($editData->profile_photo_path) ? asset('upload/admin_images/' . $editData->profile_photo_path) : asset('upload/no_images.jpg') }}"alt="User Avatar">
                                             </div>
                                         </div>
@@ -75,14 +77,14 @@
     </div>
 
     <script type="text/javascript">
-            $(document).ready(function(){
-                $('#image').change(function(e){
-                    var reader = new FileReader();
-                    reader.onload = function(e){
-                        $('#showImage').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(e.target.files['0']); 
-                });
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
             });
+        });
     </script>
 @endsection

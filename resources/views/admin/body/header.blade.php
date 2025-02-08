@@ -111,11 +111,14 @@
                     </ul>
                 </li>
 
+                @php
+                    $adminData = DB::table('admins')->where('id', 1)->first();
+                @endphp
                 <!-- User Account-->
                 <li class="dropdown user user-menu">
                     <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0"
                         data-toggle="dropdown" title="User">
-                        <img src="{{ asset('backend/images/1.jpg') }}" alt="">
+                        <img src="{{ (!empty($adminData->profile_photo_path)) ? asset('upload/admin_images/' . $adminData->profile_photo_path) : asset('upload/no_images.jpg') }}" alt="">
                     </a>
                     <ul class="dropdown-menu animated flipInX">
                         <li class="user-body">
