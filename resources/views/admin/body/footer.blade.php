@@ -9,5 +9,5 @@
             </li>
         </ul>
     </div>
-    &copy; 2020 <a href="#">Psd to Html Expert</a>. All Rights Reserved.
+    &copy; <?= date('Y') ?> <a href="#">AkbarStore</a>. All Rights Reserved.
 </footer>
