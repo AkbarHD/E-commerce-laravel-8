@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -15,9 +16,9 @@ use App\Http\Controllers\Backend\AdminProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
     Route::get('/login', [AdminController::class, 'loginForm']);
@@ -25,18 +26,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
 });
 
 
-
-
-
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
 })->name('dashboard');
 
+// route all admin
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 Route::get('/admin/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
 Route::get('/admin/profile/edit', [AdminProfileController::class, 'adminProfileEdit'])->name('admin.profile.edit');
 Route::post('/admin/profile/update', [AdminProfileController::class, 'adminProfileupdate'])->name('admin.profile.update');
+Route::get('/admin/change/password', [AdminProfileController::class, 'adminChangePassword'])->name('admin.change.password');
+Route::post('/admin/password/update', [AdminProfileController::class, 'adminUpdatePassword'])->name('admin.update.password');
 
+// route all frontend
+Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
