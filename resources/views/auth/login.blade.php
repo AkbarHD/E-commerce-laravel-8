@@ -28,20 +28,21 @@
                             @csrf
                             <div class="form-group">
                                 <label class="info-title" for="email">Email Address <span>*</span></label>
-                                <input type="email" id="email" name="email" class="form-control unicase-form-control text-input"
-                                    >
+                                <input type="email" id="email" name="email"
+                                    class="form-control unicase-form-control text-input">
                             </div>
                             <div class="form-group">
                                 <label class="info-title" for="password">Password <span>*</span></label>
-                                <input type="password" id="password" name="password" class="form-control unicase-form-control text-input"
-                                    >
+                                <input type="password" id="password" name="password"
+                                    class="form-control unicase-form-control text-input">
                             </div>
                             <div class="radio outer-xs">
                                 <label>
                                     <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Remember
                                     me!
                                 </label>
-                                <a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your Password?</a>
+                                <a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your
+                                    Password?</a>
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
                         </form>
@@ -52,31 +53,47 @@
                     <div class="col-md-6 col-sm-6 create-new-account">
                         <h4 class="checkout-subtitle">Create a new account</h4>
                         <p class="text title-tag-line">Create your new account.</p>
-                        <form class="register-form outer-top-xs" role="form">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
-                                <input type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail2">
+                                <label class="info-title" for="name">Name <span>*</span></label>
+                                <input type="text" name="name" id="name"
+                                    class="form-control unicase-form-control text-input">
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
-                                <input type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                <label class="info-title" for="email">Email Address <span>*</span></label>
+                                <input type="email" id="email" name="email"
+                                    class="form-control unicase-form-control text-input">
+                                    @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
-                                <input type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                <input type="text" id="phone" name="phone"
+                                    class="form-control unicase-form-control text-input">
+                                    @error('phone')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>
-                                <input type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                <label class="info-title" for="password">Password <span>*</span></label>
+                                <input type="password" id="password" name="password"
+                                    class="form-control unicase-form-control text-input">
+                                    @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">Confirm Password <span>*</span></label>
-                                <input type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                <input type="password" id="password_confirmation" name="password_confirmation"
+                                    class="form-control unicase-form-control text-input">
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
                         </form>
