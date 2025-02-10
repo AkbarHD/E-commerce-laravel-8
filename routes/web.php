@@ -39,7 +39,11 @@ Route::get('/admin/change/password', [AdminProfileController::class, 'adminChang
 Route::post('/admin/password/update', [AdminProfileController::class, 'adminUpdatePassword'])->name('admin.update.password');
 
 // route all frontend
-Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
+Route::get('/user/profile/edit', [IndexController::class, 'userProfileEdit'])->name('user.profile.edit');
+Route::post('/user/profile/update', [IndexController::class, 'userProfileUpdate'])->name('user.profile.update');
