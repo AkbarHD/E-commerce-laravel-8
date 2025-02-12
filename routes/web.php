@@ -4,17 +4,8 @@ use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BrandController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -28,7 +19,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
+})->name('admin.dashboard');
 
 // route all admin
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
@@ -37,6 +28,11 @@ Route::get('/admin/profile/edit', [AdminProfileController::class, 'adminProfileE
 Route::post('/admin/profile/update', [AdminProfileController::class, 'adminProfileupdate'])->name('admin.profile.update');
 Route::get('/admin/change/password', [AdminProfileController::class, 'adminChangePassword'])->name('admin.change.password');
 Route::post('/admin/password/update', [AdminProfileController::class, 'adminUpdatePassword'])->name('admin.update.password');
+
+Route::prefix('brand')->group(function() {
+    Route::get('/view', [BrandController::class, 'viewBrand'])->name('all.brand');
+    Route::get('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+});
 
 // route all frontend
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
@@ -47,3 +43,6 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
 Route::get('/user/profile/edit', [IndexController::class, 'userProfileEdit'])->name('user.profile.edit');
 Route::post('/user/profile/update', [IndexController::class, 'userProfileUpdate'])->name('user.profile.update');
+
+Route::get('/user/change/password', [IndexController::class, 'changePassword'])->name('change.password');
+Route::post('/user/update/password', [IndexController::class, 'userUpdatePassword'])->name('user.password.update');

@@ -23,7 +23,7 @@
                     <li class="list-group list-group-flush">
                         <a href="{{ route('dashboard') }}" class="btn-primary btn btn-sm btn-block">Home</a>
                         <a href="{{ route('user.profile.edit') }}" class="btn-primary btn btn-sm btn-block">Edit Profile</a>
-                        <a href="" class="btn-primary btn btn-sm btn-block">Change Password</a>
+                        <a href="{{ route('change.password') }}" class="btn-primary btn btn-sm btn-block">Change Password</a>
                         <a href="{{ route('user.logout') }}" class="btn-danger btn btn-sm btn-block">Logout</a>
                     </li>
                 </div>

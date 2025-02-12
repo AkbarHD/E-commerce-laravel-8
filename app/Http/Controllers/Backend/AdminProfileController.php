@@ -60,6 +60,7 @@ class AdminProfileController extends Controller
         ]);
 
         $hasPassword = Admin::find(1)->password;
+        // jika password lama cocok dengan password di database
         if (Hash::check($request->oldpassword, $hasPassword)) {
             $admin = Admin::find(1);
             $admin->password = Hash::make($request->password);

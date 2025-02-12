@@ -54,9 +54,6 @@
                                                 </div>
 
                                             </div>
-
-
-
                                         </div>
 
                                         <div class="text-xs-right">
