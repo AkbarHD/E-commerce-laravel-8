@@ -31,7 +31,10 @@ Route::post('/admin/password/update', [AdminProfileController::class, 'adminUpda
 
 Route::prefix('brand')->group(function() {
     Route::get('/view', [BrandController::class, 'viewBrand'])->name('all.brand');
-    Route::get('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+    Route::put('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
 });
 
 // route all frontend

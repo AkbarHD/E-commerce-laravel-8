@@ -30,8 +30,8 @@
                                                 <img src="{{ asset($item->brand_image) }}" alt="">
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-info">Edit</a>
-                                                <a href="" class="btn btn-danger">Delete</a>
+                                                <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                                <a href="{{ route('brand.delete', $item->id) }}" onclick="return confirm('Are you sure?') }}" id="delete" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @empty
@@ -59,12 +59,12 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-12">
-                                <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data"></form>
+                                <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                 <div class="form-group">
                                     <h5>Brand Name En<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" id="brand_name_en" name="brand_name_en"
-                                            class="form-control">
+                                        <input type="text" id="brand_name_en" name="brand_name_en" class="form-control">
                                         @error('brand_name_en')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -85,8 +85,7 @@
                                 <div class="form-group">
                                     <h5>Image Brand<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="file" id="brand_image" name="brand_image"
-                                            class="form-control">
+                                        <input type="file" id="brand_image" name="brand_image" class="form-control">
                                         @error('brand_image')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -94,8 +93,12 @@
                                 </div>
 
                                 <div>
-                                    <button type="submit" class="btn btn-primary btn-rounded btn-block mt-3">Tambah Brand</button>
+                                    {{-- <button type="submit" class="btn btn-primary btn-rounded btn-block mt-3">Tambah
+                                        Brand</button> --}}
+                                        <input type="submit" class="btn btn-primary btn-rounded btn-block mt-3" value="Tambah Brand">
                                 </div>
+                            </form>
+
                             </div>
                         </div>
 
