@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -20,7 +21,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
 })->name('admin.dashboard');
-
 // route all admin
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 Route::get('/admin/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
@@ -28,7 +28,6 @@ Route::get('/admin/profile/edit', [AdminProfileController::class, 'adminProfileE
 Route::post('/admin/profile/update', [AdminProfileController::class, 'adminProfileupdate'])->name('admin.profile.update');
 Route::get('/admin/change/password', [AdminProfileController::class, 'adminChangePassword'])->name('admin.change.password');
 Route::post('/admin/password/update', [AdminProfileController::class, 'adminUpdatePassword'])->name('admin.update.password');
-
 Route::prefix('brand')->group(function() {
     Route::get('/view', [BrandController::class, 'viewBrand'])->name('all.brand');
     Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store');
@@ -42,12 +41,17 @@ Route::prefix('category')->group(function() {
     Route::get('/edit/{id}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
     Route::put('/update/{id}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
     Route::get('/delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
+});
+Route::prefix('subcategory')->group(function() {
+    Route::get('/sub/view', [SubCategoryController::class, 'viewSubcategory'])->name('all.subcategory');
+    Route::post('/sub/store', [SubCategoryController::class, 'subcategoryStore'])->name('subcategory.store');
+    Route::get('/sub/edit/{id}', [SubCategoryController::class, 'subcategoryEdit'])->name('subcategory.edit');
+    Route::post('/sub/update/{id}', [SubCategoryController::class, 'subcategoryUpdate'])->name('subcategory.update');
+    Route::get('/sub/delete/{id}', [SubCategoryController::class, 'subcategoryDelete'])->name('subcategory.delete');
 
-    Route::get('/view', [CategoryController::class, 'viewCategory'])->name('all.subcategory');
-    Route::post('/store', [CategoryController::class, 'categoryStore'])->name('subcategory.store');
-    Route::get('/edit/{id}', [CategoryController::class, 'categoryEdit'])->name('subcategory.edit');
-    Route::put('/update/{id}', [CategoryController::class, 'categoryUpdate'])->name('subcategory.update');
-    Route::get('/delete/{id}', [CategoryController::class, 'categoryDelete'])->name('subcategory.delete');
+
+    Route::get('/sub/sub/view', [SubCategoryController::class, 'subSubcategoryView'])->name('all.subsubcategory');
+    Route::get('/ajax/{category_id}', [SubCategoryController::class, 'getSubcategoryAjax']);
 });
 
 // route all frontend
