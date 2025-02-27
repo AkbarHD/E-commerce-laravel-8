@@ -99,4 +99,29 @@ class SubCategoryController extends Controller
         $subcategories = SubCategory::where('category_id', $category_id)->get();
         return json_encode($subcategories);
     }
+
+    public function subSubcategoryStore(Request $request)
+    {
+        $request->validate([
+            'subsubcategory_name_en' => 'required',
+            'subsubcategory_name_ind' => 'required',
+            'category_id' => 'required',
+            'subcategory_id' => 'required'
+        ]);
+
+        SubSubCategory::insert([
+            'subsubcategory_name_en' => $request->subsubcategory_name_en,
+            'subsubcategory_name_ind' => $request->subsubcategory_name_ind,
+            'subsubcategory_slug_en' => Str::slug($request->subsubcategory_name_en),
+            'subsubcategory_slug_ind' => Str::slug($request->subsubcategory_name_ind),
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id
+        ]);
+        $notification = [
+            'message' => 'Data Sub Subcategory berhasil di tambahkan',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }

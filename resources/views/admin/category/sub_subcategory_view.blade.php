@@ -19,6 +19,7 @@
                                 <thead>
                                     <tr>
 
+                                        <th>No</th>
                                         <th>Category</th>
                                         <th>SubCategory Name </th>
                                         <th>Sub->subCategory Name En</th>
@@ -28,6 +29,7 @@
                                 <tbody>
                                     @forelse ($subsubcategories as $item)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->category->category_name_en }}</td>
                                             <td>{{ $item->subcategory->subcategory_name_en }}</td>
                                             <td>{{ $item->subsubcategory_name_en }}</td>
@@ -64,7 +66,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-12">
-                                <form action="{{ route('subcategory.store') }}" method="post">
+                                <form action="{{ route('subsubcategory.store') }}" method="post">
                                     @csrf
                                     <div class="form-group">
                                         <h5>Category <span class="text-danger">*</span></h5>
@@ -149,8 +151,6 @@
                         dataType: "json",
                         success: function(data) {
                             $('select[name="subcategory_id"]').empty();
-                            $('select[name="subcategory_id"]').append(
-                                '<option value="">Pilih SubCategory</option>');
                             $.each(data, function(key, value) {
                                 $('select[name="subcategory_id"]').append(
                                     '<option value="' + value.id + '">' + value
