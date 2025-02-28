@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
     {{-- toast --}}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    {{-- jquery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 </head>
 

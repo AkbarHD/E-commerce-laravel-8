@@ -124,4 +124,50 @@ class SubCategoryController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function subSubcategoryEdit(Request $request, $id)
+    {
+        $subsubcategory = SubSubCategory::findOrFail($id);
+        $category = Category::latest()->get();
+        $subcategory = SubCategory::latest()->get();
+        return view('admin.category.sub_subcategory_edit', compact('subsubcategory', 'category', 'subcategory'));
+    }
+
+    public function subSubcategoryUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'subsubcategory_name_en' => 'required',
+            'subsubcategory_name_ind' => 'required',
+            'category_id' => 'required',
+            'subcategory_id' => 'required'
+        ]);
+
+        SubSubCategory::findOrFail($id)->update([
+            'subsubcategory_name_en' => $request->subsubcategory_name_en,
+            'subsubcategory_name_ind' => $request->subsubcategory_name_ind,
+            'subsubcategory_slug_en' => Str::slug($request->subsubcategory_name_en),
+            'subsubcategory_slug_ind' => Str::slug($request->subsubcategory_name_ind),
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id
+        ]);
+
+        $notification = [
+            'message' => 'Data Sub Subcategory berhasil di update',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('all.subsubcategory')->with($notification);
+    }
+
+    public function subSubcategoryDelete($id)
+    {
+        $subsubcategory = SubSubCategory::findOrFail($id);
+        $subsubcategory->delete();
+        $notification = [
+            'message' => 'Data Sub Subcategory berhasil di hapus',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
 }
