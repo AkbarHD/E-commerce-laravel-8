@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 
 // Route::get('/', function () {
@@ -35,6 +36,7 @@ Route::prefix('brand')->group(function() {
     Route::put('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update');
     Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
 });
+
 Route::prefix('category')->group(function() {
     Route::get('/view', [CategoryController::class, 'viewCategory'])->name('all.category');
     Route::post('/store', [CategoryController::class, 'categoryStore'])->name('category.store');
@@ -42,6 +44,7 @@ Route::prefix('category')->group(function() {
     Route::put('/update/{id}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
     Route::get('/delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
 });
+
 Route::prefix('subcategory')->group(function() {
     Route::get('/sub/view', [SubCategoryController::class, 'viewSubcategory'])->name('all.subcategory');
     Route::post('/sub/store', [SubCategoryController::class, 'subcategoryStore'])->name('subcategory.store');
@@ -56,6 +59,14 @@ Route::prefix('subcategory')->group(function() {
     Route::get('/sub/sub/edit/{id}', [SubCategoryController::class, 'subSubcategoryEdit'])->name('subsubcategory.edit');
     Route::post('/sub/sub/update/{id}', [SubCategoryController::class, 'subSubcategoryUpdate'])->name('subsubcategory.update');
     Route::get('/sub/sub/delete/{id}', [SubCategoryController::class, 'subSubcategoryDelete'])->name('subsubcategory.delete');
+});
+
+Route::prefix('product')->group(function() {
+    Route::get('/add-product', [ProductController::class, 'addProduct'])->name('add-product');
+    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+    Route::put('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
 });
 
 // route all frontend
