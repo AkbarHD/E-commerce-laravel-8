@@ -343,14 +343,14 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <div class="form-group">
-                                                        <h5>Product Tags En<span class="text-danger">*</span></h5>
+                                                        <h5>Product Size Ind<span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <div class="controls">
-                                                                <input type="text" name="product_tags_en"
+                                                                <input type="text" name="product_size_ind"
                                                                     class="form-control" value="Lorem,Ipsum,Amet"
                                                                     data-role="tagsinput" placeholder="add tags">
                                                             </div>
-                                                            @error('product_tags_en')
+                                                            @error('product_size_ind')
                                                                 <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
@@ -359,14 +359,14 @@
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <h5>Product Tags ind<span class="text-danger">*</span></h5>
+                                                    <h5>Product Color En</h5>
                                                     <div class="controls">
                                                         <div class="controls">
-                                                            <input type="text" name="product_tags_ind"
+                                                            <input type="text" name="product_color_en"
                                                                 class="form-control" value="Lorem,Ipsum,Amet"
                                                                 data-role="tagsinput" placeholder="add tags">
                                                         </div>
-                                                        @error('product_tags_ind')
+                                                        @error('product_color_en')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
@@ -375,14 +375,14 @@
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <h5>Product Size En<span class="text-danger">*</span></h5>
+                                                    <h5>Product Color Ind<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <div class="controls">
-                                                            <input type="text" name="product_size_en"
+                                                            <input type="text" name="product_color_ind"
                                                                 class="form-control" value="Lorem,Ipsum,Amet"
                                                                 data-role="tagsinput" placeholder="add tags">
                                                         </div>
-                                                        @error('product_size_en')
+                                                        @error('product_color_ind')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
@@ -390,7 +390,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <div class="form-group">
@@ -439,37 +439,35 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Checkbox Group <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_2" required
-                                                                value="x">
-                                                            <label for="checkbox_2">I am unchecked Checkbox</label>
+                                                                value="1" name="hot_deals">
+                                                            <label for="checkbox_2">Hot Deals</label>
                                                         </fieldset>
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_3" value="y">
-                                                            <label for="checkbox_3">I am unchecked too</label>
+                                                            <input type="checkbox" id="checkbox_3" value="1">
+                                                            <label for="checkbox_3">Featured</label>
                                                         </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <h5>Checkbox Group <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_2" required
-                                                                value="x">
-                                                            <label for="checkbox_2">I am unchecked Checkbox</label>
+                                                            <input type="checkbox" id="checkbox_4" required
+                                                                value="1">
+                                                            <label for="checkbox_4">Special Offer</label>
                                                         </fieldset>
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_3" value="y">
-                                                            <label for="checkbox_3">I am unchecked too</label>
+                                                            <input type="checkbox" id="checkbox_5" value="1">
+                                                            <label for="checkbox_5">Special Deals</label>
                                                         </fieldset>
                                                     </div>
                                                 </div>
