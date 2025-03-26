@@ -170,4 +170,10 @@ class SubCategoryController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function getSubsubcategoryAjax($subcategory_id)
+    {
+        $subsubcategories = SubSubCategory::where('subcategory_id', $subcategory_id)->get();
+        return json_encode($subsubcategories);
+    }
 }

@@ -494,4 +494,56 @@
         </section>
         <!-- /.content -->
     </div>
+
+
+    <script>
+        $(document).ready(function() {
+            $('select[name="category_id"]').on('change', function() {
+                var category_id = $(this).val();
+                // alert(category_id);
+
+                if (category_id) {
+                    $.ajax({
+                        url: "{{ url('/subcategory/ajax') }}/" + category_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="subsubcategory_id"]').empty();
+                            $('select[name="subcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="subcategory_id"]').append(
+                                    '<option value="' + value.id + '">' + value
+                                    .subcategory_name_en + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    $('select[name="subcategory_id"]').empty();
+                }
+            });
+
+            $('select[name="subcategory_id"]').on('change', function() {
+                var subcategory_id = $(this).val();
+                // alert(category_id);
+
+                if (subcategory_id) {
+                    $.ajax({
+                        url: "{{ url('/subcategory/sub/ajax') }}/" + subcategory_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="subsubcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="subsubcategory_id"]').append(
+                                    '<option value="' + value.id + '">' + value
+                                    .subsubcategory_name_en + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    $('select[name="subcategory_id"]').empty();
+                }
+            });
+        });
+    </script>
 @endsection
