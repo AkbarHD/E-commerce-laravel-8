@@ -18,7 +18,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form novalidate>
+                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
 
@@ -196,8 +197,9 @@
                                                     <div class="controls">
                                                         <div class="controls">
                                                             <input type="file" name="product_thumbnail"
-                                                                class="form-control" required>
+                                                                class="form-control" onchange="mainThamUrl(this)" required>
                                                         </div>
+                                                        <img src="" id="mainThumb" alt="">
                                                         @error('product_thumbnail')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
@@ -211,11 +213,12 @@
                                                     <div class="controls">
                                                         <div class="controls">
                                                             <input type="file" name="multiple_img[]"
-                                                                class="form-control" required>
+                                                                class="form-control" multiple="" id="multiImg" required>
                                                         </div>
                                                         @error('multiple_img[]')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
+                                                        <div class="row" id="preview_img"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -496,7 +499,7 @@
     </div>
 
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $('select[name="category_id"]').on('change', function() {
                 var category_id = $(this).val();
@@ -545,5 +548,48 @@
                 }
             });
         });
+    </script>
+
+    <script type="text/javascript">
+        function mainThamUrl(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#mainThumb').attr('src', e.target.result).width(80).height(80);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#multiImg').on('change', function() {
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    var data = $(this)[0].files; //this file data
+
+                    $.each(data, function(index, file) {
+                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) {
+                            //Create image element
+                            var picReader = new FileReader();
+                            picReader.onload = (e) => {
+                                var picFile = e.target;
+                                var html = $('<li class="list-inline-item"><img class="mb-4" src="' + picFile.result + '" width="80" height="80" /><button type="button" class="btn btn-danger btn-sm remove">Remove</button></li>');
+                                $('#preview_img').append(html);
+                            }
+                            picReader.readAsDataURL(file);
+                        } else {
+                            alert('Not a vaild image!');
+                        }
+                    });
+                } else {
+                    alert("Your browser does not support File API")
+                }
+            });
+
+            $(document).on('click', '.remove', function() {
+                $(this).parent().remove();
+            });
+                    })
     </script>
 @endsection

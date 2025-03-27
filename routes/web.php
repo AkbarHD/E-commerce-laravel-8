@@ -64,10 +64,11 @@ Route::prefix('subcategory')->group(function() {
 
 Route::prefix('product')->group(function() {
     Route::get('/add-product', [ProductController::class, 'addProduct'])->name('add-product');
-    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store');
-    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
-    Route::put('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update');
-    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
+
+    Route::post('/store', [ProductController::class, 'productStore'])->name('product.store');
+    Route::get('/edit/{id}', [ProductController::class, 'brandEdit'])->name('brand.edit');
+    Route::put('/update/{id}', [ProductController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('/delete/{id}', [ProductController::class, 'brandDelete'])->name('brand.delete');
 });
 
 // route all frontend
