@@ -84,9 +84,7 @@ class SubCategoryController extends Controller
         return redirect()->back()->with($notification);
     }
 
-
     // sub sub category
-
     public function subSubcategoryView()
     {
         $category =  Category::latest()->get();

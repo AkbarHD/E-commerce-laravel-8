@@ -449,7 +449,7 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_2" required
+                                                            <input type="checkbox" id="checkbox_2"
                                                                 value="1" name="hot_deals">
                                                             <label for="checkbox_2">Hot Deals</label>
                                                         </fieldset>
@@ -464,7 +464,7 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_4" required
+                                                            <input type="checkbox" id="checkbox_4"
                                                                 value="1">
                                                             <label for="checkbox_4">Special Offer</label>
                                                         </fieldset>

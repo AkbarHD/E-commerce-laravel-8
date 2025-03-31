@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ProductController extends Controller
         Image::make($image)->resize(917, 1000)->save('upload/products/thumbnails/' . $name_gen);
         $save_url = 'upload/products/thumbnails/' . $name_gen;
 
-        Product::insert([
+        $product_id = Product::insertGetId([
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
@@ -59,13 +60,26 @@ class ProductController extends Controller
             'special_deals' => $request->special_deals,
             'status' => 1,
             'created_at' => now(),
-
         ]);
+
+        $images = $request->file('multiple_img');
+        foreach ($images as $img) {
+            $make_img = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
+            Image::make($img)->resize(917, 1000)->save('upload/products/multiple_images/' . $make_img);
+            $save_img = 'upload/products/product_img/' . $make_img;
+
+            MultiImg::insert([
+                'product_id' => $product_id,
+                'photo_name' => $save_img,
+                'created_at' => now(),
+            ]);
+        }
+
         $notification = [
             'message' => 'Data Product berhasil di tambahkan',
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('all.product')->with($notification);
+        return redirect()->route('add-product')->with($notification);
     }
 }
