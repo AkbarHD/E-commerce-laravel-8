@@ -82,4 +82,10 @@ class ProductController extends Controller
 
         return redirect()->route('add-product')->with($notification);
     }
+
+    public function manageProduct()
+    {
+        $products = Product::latest()->get();
+        return view('admin.product.product_view', compact('products'));
+    }
 }
