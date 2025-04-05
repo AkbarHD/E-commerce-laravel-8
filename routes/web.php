@@ -67,9 +67,7 @@ Route::prefix('product')->group(function() {
     Route::get('/manage', [ProductController::class, 'manageProduct'])->name('manage-product');
 
     Route::post('/store', [ProductController::class, 'productStore'])->name('product.store');
-    Route::get('/edit/{id}', [ProductController::class, 'brandEdit'])->name('product.edit');
-    Route::put('/update/{id}', [ProductController::class, 'brandUpdate'])->name('product.update');
-    Route::get('/delete/{id}', [ProductController::class, 'brandDelete'])->name('product.delete');
+    Route::get('/edit/{id}', [ProductController::class, 'editProduct'])->name('product.edit');
 });
 
 // route all frontend

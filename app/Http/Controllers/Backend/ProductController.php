@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -66,7 +67,7 @@ class ProductController extends Controller
         foreach ($images as $img) {
             $make_img = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
             Image::make($img)->resize(917, 1000)->save('upload/products/multiple_images/' . $make_img);
-            $save_img = 'upload/products/product_img/' . $make_img;
+            $save_img = 'upload/products/multiple_images/' . $make_img;
 
             MultiImg::insert([
                 'product_id' => $product_id,
@@ -88,4 +89,15 @@ class ProductController extends Controller
         $products = Product::latest()->get();
         return view('admin.product.product_view', compact('products'));
     }
+
+    public function editProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $categories = Category::latest()->get();
+        $subcategories = SubCategory::latest()->get();
+        $subsubcategories = SubSubCategory::latest()->get();
+        $brands = Brand::latest()->get();
+        return view('admin.product.product_edit', compact('product', 'categories', 'subcategories', 'brands', 'subsubcategories'));
+    }
+
 }

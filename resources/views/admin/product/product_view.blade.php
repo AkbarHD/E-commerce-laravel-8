@@ -30,7 +30,7 @@
                                             <td>{{ $item->product_name_en }}</td>
                                             <td>{{ $item->product_name_ind }}</td>
                                             <td class="d-flex ">
-                                                <a href="{{ route('subcategory.edit', $item->id) }}"
+                                                <a href="{{ route('product.edit', $item->id) }}"
                                                     class="btn btn-info btn-sm"> <i class="fa fa-pencil"></i> </a>
                                                 <a href="{{ route('subcategory.delete', $item->id) }}"
                                                     onclick="return confirm('Are you sure?') }}" id="delete"
