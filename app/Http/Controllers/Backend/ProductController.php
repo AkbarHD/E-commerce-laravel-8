@@ -100,4 +100,45 @@ class ProductController extends Controller
         return view('admin.product.product_edit', compact('product', 'categories', 'subcategories', 'brands', 'subsubcategories'));
     }
 
+    public function productUpdate(Request $request, $id)
+    {
+        Product::findOrFail($id)->update([
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_id' => $request->subsubcategory_id,
+            'product_code' => $request->product_code,
+            'product_name_en' => $request->product_name_en,
+            'product_name_ind' => $request->product_name_ind,
+            'product_slug_en' => Str::slug($request->product_name_en),
+            'product_slug_ind' => Str::slug($request->product_name_ind),
+            'product_qty' => $request->product_qty,
+            'product_tags_en' => $request->product_tags_en,
+            'product_tags_ind' => $request->product_tags_ind,
+            'product_size_en' => $request->product_size_en,
+            'product_size_ind' => $request->product_size_ind,
+            'product_color_en' => $request->product_color_en,
+            'product_color_ind' => $request->product_color_ind,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->discount_price,
+            'short_descp_en' => $request->short_descp_en,
+            'short_descp_ind' => $request->short_descp_ind,
+            'long_descp_en' => $request->long_descp_en,
+            'long_descp_ind' => $request->long_descp_ind,
+            'hot_deals' => $request->hot_deals,
+            'featured' => $request->featured,
+            'special_offer' => $request->special_offer,
+            'special_deals' => $request->special_deals,
+            'status' => 1,
+            'created_at' => now(),
+        ]);
+
+        $notification = [
+            'message' => 'Data Product berhasil di update',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('manage-product')->with($notification);
+    }
+
 }

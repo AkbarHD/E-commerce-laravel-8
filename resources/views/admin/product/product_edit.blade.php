@@ -18,7 +18,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('product.update', $product->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -144,7 +145,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <h5>Product Code<span class="text-danger">*</span></h5>
@@ -162,7 +163,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <h5>Product Quantity<span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -178,7 +179,12 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-4">
+
+                                        </div>
+
+                                        <div class="row">
+                                            {{-- product selling price --}}
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <h5>Product Selling Price<span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -194,10 +200,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <h5>Product Discount Price<span class="text-danger">*</span></h5>
@@ -215,39 +219,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <h5>Main Thumbnail<span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <div class="controls">
-                                                            <input type="file" name="product_thumbnail"
-                                                                class="form-control" onchange="mainThamUrl(this)"
-                                                                required>
-                                                        </div>
-                                                        <img src="" id="mainThumb" alt="">
-                                                        @error('product_thumbnail')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
+                                            {{-- main Thumbnail --}}
 
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <h5>Multiple Image<span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <div class="controls">
-                                                            <input type="file" name="multiple_img[]"
-                                                                class="form-control" multiple="" id="multiImg"
-                                                                required>
-                                                        </div>
-                                                        @error('multiple_img[]')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
-                                                        <div class="row" id="preview_img"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {{-- multiple images --}}
+
                                         </div>
 
                                         <div class="row">
