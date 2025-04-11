@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MultiImg extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'product_id',
+        'photo_name',
+    ];
+    protected $table = 'multi_imgs';
 }

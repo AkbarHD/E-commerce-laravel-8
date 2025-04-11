@@ -92,12 +92,13 @@ class ProductController extends Controller
 
     public function editProduct($id)
     {
+        $multipleImg = MultiImg::where('product_id', $id)->get();
         $product = Product::findOrFail($id);
         $categories = Category::latest()->get();
         $subcategories = SubCategory::latest()->get();
         $subsubcategories = SubSubCategory::latest()->get();
         $brands = Brand::latest()->get();
-        return view('admin.product.product_edit', compact('product', 'categories', 'subcategories', 'brands', 'subsubcategories'));
+        return view('admin.product.product_edit', compact('product', 'categories', 'subcategories', 'brands', 'subsubcategories', 'multipleImg'));
     }
 
     public function productUpdate(Request $request, $id)
@@ -139,6 +140,29 @@ class ProductController extends Controller
         ];
 
         return redirect()->route('manage-product')->with($notification);
+    }
+
+    public function imageUpdate(Request $request)
+    {
+        $multiple_img = $request->multiple_img;
+        foreach ($multiple_img as $id => $img) {
+            $imgDel = MultiImg::findOrFail($id);
+            unlink($imgDel->photo_name);
+
+            $make_img = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
+            Image::make($img)->resize(917, 1000)->save('upload/products/multiple_images/' . $make_img);
+            $save_img = 'upload/products/multiple_images/' . $make_img;
+
+            MultiImg::where('id', $id)->update([
+                'photo_name' => $save_img,
+                'updated_at' => now(),
+            ]);
+        }
+        $notification = [
+            'message' => 'Data Product Image berhasil di update',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
 
 }
