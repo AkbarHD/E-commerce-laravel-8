@@ -458,6 +458,56 @@
             </div>
             <!-- /.box -->
 
+            {{-- thumbnail images --}}
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box bt-3 border-info">
+                            <div class="box-header">
+                                <h4 class="box-title">Product Thumbnail Image Update</h4>
+                            </div>
+
+                            <div class="box-body">
+                                <form action="{{ route('thumbnail.update', $product->id) }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="card">
+                                                <img src="{{ asset($product->product_thumbnail) }}" class="card-img-top"
+                                                    style="width: 300px;" alt="">
+                                                <div class="card-body">
+                                                    <div class="card-text">
+                                                        <div class="form-group mt-2">
+                                                            <label for="" class="form-control-label">
+                                                                Change Thumbnail
+                                                                <span class="text-danger">*</span>
+                                                                <input type="file" name="product_thumbnail"
+                                                                    class="form-control" onchange="mainThamUrl(this)"
+                                                                   >
+                                                                   <img src="" id="mainThumb" alt="">
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="text-xs-right">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5"
+                                            value="Update Thumbnail">
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- multiple images --}}
             <div class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -473,18 +523,20 @@
                                         @foreach ($multipleImg as $img)
                                             <div class="col-md-3">
                                                 <div class="card">
-                                                    <img src="{{ asset($img->photo_name) }}" class="card-img-top" style="width: 300px;"
-                                                        alt="">
+                                                    <img src="{{ asset($img->photo_name) }}" class="card-img-top"
+                                                        style="width: 300px;" alt="">
                                                     <div class="card-body">
                                                         <div class="card-text">
-                                                            <a href="" class="btn btn-sm btn-danger" id="delete" title="Delete data">
+                                                            <a href="" class="btn btn-sm btn-danger"
+                                                                id="delete" title="Delete data">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                             <div class="form-group mt-2">
                                                                 <label for="" class="form-control-label">
                                                                     Change Image
                                                                     <span class="text-danger">*</span>
-                                                                    <input type="file" name="multiple_img[{{ $img->id }}]">
+                                                                    <input type="file"
+                                                                        name="multiple_img[{{ $img->id }}]">
                                                                 </label>
                                                             </div>
                                                         </div>

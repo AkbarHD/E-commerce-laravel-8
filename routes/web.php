@@ -70,6 +70,7 @@ Route::prefix('product')->group(function() {
     Route::get('/edit/{id}', [ProductController::class, 'editProduct'])->name('product.edit');
     Route::post('/update/data/{id}', [ProductController::class, 'productUpdate'])->name('product.update');
     Route::post('/update/images', [ProductController::class, 'imageUpdate'])->name('image.update');
+    Route::post('/update/thumbnail/{id}', [ProductController::class, 'updateThumbnail'])->name('thumbnail.update');
 });
 
 // route all frontend
